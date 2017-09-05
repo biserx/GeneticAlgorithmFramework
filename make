@@ -1,7 +1,15 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
-rm obj/*
+if [ ! -d "lib" ]; then
+  mkdir lib
+fi
+if [ ! -d "obj" ]; then
+  mkdir obj
+else
+  rm obj/*
+fi
+
 g++ -c src/initializators/RandomInitializator.cpp  -std=c++11 -o obj/RandomInitializator.o
 g++ -c src/initializators/SeedInitializator.cpp  -std=c++11 -o obj/SeedInitializator.o
 
@@ -14,7 +22,5 @@ g++ -c src/crossovers/ValueOnePointCrossover.cpp  -std=c++11 -o obj/ValueOnePoin
 g++ -c src/mutators/RealValueAbsAmountMutation.cpp  -std=c++11 -o obj/RealValueAbsAmountMutation.o
 
 g++ -c src/mergers/ProportionMerge.cpp  -std=c++11 -o obj/ProportionMerge.o
-
-
 
 ar rcs lib/libGA.a obj/*
