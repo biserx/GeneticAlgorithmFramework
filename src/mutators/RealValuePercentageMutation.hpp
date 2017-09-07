@@ -2,13 +2,13 @@
 #include "MutationBlock.hpp"
 
 namespace GA {
-	class RealValueAbsAmountMutation : public MutationBlock
+	class RealValuePercentageMutation : public MutationBlock
 	{
 		private:
 			double probability;
-			double amount;
+			double percentage;
 		public:
-			RealValueAbsAmountMutation(double, double);
+			RealValuePercentageMutation(double, double);
 			void mutate(Individual*);
 			void setMutationParameters(double, double);
 	};

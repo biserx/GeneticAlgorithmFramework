@@ -20,6 +20,7 @@ g++ -c src/selectors/RouletteWheelSelection.cpp  -std=c++11 -o obj/RouletteWheel
 g++ -c src/crossovers/ValueOnePointCrossover.cpp  -std=c++11 -o obj/ValueOnePointCrossover.o
 
 g++ -c src/mutators/RealValueAbsAmountMutation.cpp  -std=c++11 -o obj/RealValueAbsAmountMutation.o
+g++ -c src/mutators/RealValuePercentageMutation.cpp  -std=c++11 -o obj/RealValuePercentageMutation.o
 
 g++ -c src/mergers/ProportionMerge.cpp  -std=c++11 -o obj/ProportionMerge.o
 

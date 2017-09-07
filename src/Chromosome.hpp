@@ -2,58 +2,61 @@
 #define CHROMOSOME
 
 #include <vector>
-#include "common.hpp"
+#include "config.hpp"
 
 using namespace std;
 
-typedef vector<GENOTYPE_TYPE> ChromosomeValues;
+namespace GA {
 
-class Chromosome
-{
-	private:
-		ChromosomeValues values;
-	public:
-		Chromosome() {
-			DEBUG("\tChromosome: Default constructor");
-		}
-		Chromosome(const Chromosome& another) : values(another.getValues()) {
-    		DEBUG("\tChromosome: Copy constructor");
-		}
-		Chromosome(const ChromosomeValues& vals) : values(vals) {
-			DEBUG("\tChromosome: Constructor by chromosome vals");
-		}
-		Chromosome(int chromosomeSize) : values(chromosomeSize, 0) {
-			DEBUG("\tChromosome: Constructor by chromosome size");
-		}
+	typedef vector<GENOTYPE_TYPE> ChromosomeValues;
 
-		inline bool operator==(const Chromosome c) {
-			for (int i = 0; i < values.size(); i++) {
-				if (values[i] != c.getValues()[i]) {
-					return false;
-				}
+	class Chromosome
+	{
+		private:
+			ChromosomeValues values;
+		public:
+			Chromosome() {
+				DEBUG("\tChromosome: Default constructor");
 			}
-			return true;
-		}
+			Chromosome(const Chromosome& another) : values(another.getValues()) {
+	    		DEBUG("\tChromosome: Copy constructor");
+			}
+			Chromosome(const ChromosomeValues& vals) : values(vals) {
+				DEBUG("\tChromosome: Constructor by chromosome vals");
+			}
+			Chromosome(int chromosomeSize) : values(chromosomeSize, 0) {
+				DEBUG("\tChromosome: Constructor by chromosome size");
+			}
 
-		int size() const {
-			return values.size();
-		}
+			inline bool operator==(const Chromosome c) {
+				for (int i = 0; i < values.size(); i++) {
+					if (values[i] != c.getValues()[i]) {
+						return false;
+					}
+				}
+				return true;
+			}
 
-		void setValues(const ChromosomeValues& vals) {
-			values = ChromosomeValues(vals.begin(), vals.end());
-		}
+			int size() const {
+				return values.size();
+			}
 
-		const ChromosomeValues& getValues() const { return values; }
-		ChromosomeValues* getValues() { return &values; }
+			void setValues(const ChromosomeValues& vals) {
+				values = ChromosomeValues(vals.begin(), vals.end());
+			}
 
-		string to_string2() const {
-			string out;
-			out.reserve(values.size() * 10);
-			for(int i = 0; i < values.size() - 1; i++)
-				out += to_string(values[i]) + ", ";
-			out += to_string(values[values.size() - 1]);
-			return out;
-		}
-};
+			const ChromosomeValues& getValues() const { return values; }
+			ChromosomeValues* getValues() { return &values; }
+
+			string to_string2() const {
+				string out;
+				out.reserve(values.size() * 10);
+				for(int i = 0; i < values.size() - 1; i++)
+					out += to_string(values[i]) + ", ";
+				out += to_string(values[values.size() - 1]);
+				return out;
+			}
+	};
+}
 
 #endif

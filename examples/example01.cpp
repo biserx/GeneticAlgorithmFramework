@@ -1,9 +1,15 @@
 #include <iostream>
 #include <chrono>
-#include "../src/GeneticAlgorithm.hpp"
+#include "../src/GeneticAlgorithmFramework.hpp"
 
 using namespace std;
 using namespace std::chrono;
+using namespace GA;
+
+// Specify here if we are looking for minimum or maximum
+namespace GA {
+	bool searchForMaximum = false;
+}
 
 const int POPULATION_SIZE = 20;
 const int CHROMOSOME_SIZE = 3;
@@ -19,7 +25,7 @@ const double MUTATION_MAX_AMOUNT = 0.4;
 
 const double OLD_VS_NEW_GENERATION_RATIO = 0.1;
 
-// Here we define a function that calculates fitness 
+// Here we define a function that calculates fitness
 // for the problem we are trying to solve using GA
 // In this example, we are solving three equations
 // with three unknowns.
@@ -33,16 +39,16 @@ double foo(ChromosomeValues *input) {
 	double totalError = abs(e1) + abs(e2) + abs(e3);
 	// GA rawards individuals with higher fitness
 	// so we subtract totalError from some large value.
-	// Individuals with lower totalError will have 
-	// higher fitness that way. 
-	return 100000 - totalError;
+	// Individuals with lower totalError will have
+	// higher fitness that way.
+	return totalError;
 }
 
 
 int main() {
-	
+
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	
+
 	// Initialize Genetic Algorithm class.
 	GeneticAlgorithm();
 
@@ -56,25 +62,25 @@ int main() {
 
 	Generation gen(POPULATION_SIZE, CHROMOSOME_SIZE);
 	init_block.init(&gen); // Initialize generation to some starting values
-		
+
 	fit_block.calc(&gen); // Calculate fitness for each individual in starting generation
 
 	cout << "Starting generation: " << endl;
 	cout << gen.to_string2() << endl;
 
 	int genNo = 1;
-	double bestFitness = 0;
+	double bestFitness = 1000000;
 	while(genNo < 500) {
 		// Check if there is an individual with better fitness and if there is one
 		// update the best fitness and print info to console
-		if (gen.getBestIndividual().getFitness() > bestFitness) {
-			cout << genNo << "  " << gen.getBestIndividual().getFitness() << endl;
+		if (gen.getBestIndividual().getFitness() < bestFitness) {
+			cout << "New best fitness " << gen.getBestIndividual().getFitness() << " found in generation: " << genNo << endl;
 			bestFitness = gen.getBestIndividual().getFitness();
 		}
 
 		sel_block.reset();
 		sel_block.add_candidates(gen); // Add generation to the selection block for later selections of parents
-		
+
 		Generation newGen(0, 0);
 		for (int i = 0; i < POPULATION_SIZE; i+=2) {
 			// Select parents for reproduction
@@ -85,8 +91,8 @@ int main() {
 				parents.clear();
 				sel_block.get_selected(&parents, 2);
 			}
-		
-			cros_block.crossover(&parents); 
+
+			cros_block.crossover(&parents);
 			// At this point parents are actually children, so let's change the
 			// variable name to avoid further confusion
 			Parents children = parents;
@@ -98,22 +104,22 @@ int main() {
 		}
 		fit_block.calc(&newGen);
 
-		// Here we merge old with new generation, leaving some percentage 
-		// of the best individuals from the old generation to enter 
+		// Here we merge old with new generation, leaving some percentage
+		// of the best individuals from the old generation to enter
 		// a generation for next iteration
 		Generation tmpGen(0, 0);
 		merge_block.merge(gen, newGen, &tmpGen, POPULATION_SIZE);
 		gen = tmpGen;
-		
-		genNo++;		
+
+		genNo++;
 	}
 
 	cout << "Final generation: " << endl;
 	cout << gen.to_string2() << endl;
-	
+
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>( t2 - t1 ).count();
-	cout << "Execution time: " << duration << endl;
+	cout << "Execution time: " << duration << "us" << endl;
 
 	return 0;
 }
