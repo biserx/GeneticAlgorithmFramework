@@ -3,10 +3,8 @@
 	#define DEBUG(msg) if(false) std::cout << msg << std::endl
 #endif
 
-#ifndef GENOTYPE_TYPE
+#ifdef USE_REAL_VALUES
 	#define GENOTYPE_TYPE double
-#endif
-
-#ifndef PRECISION
-	#define PRECISION 1000000
+#else
+	#define GENOTYPE_TYPE int
 #endif

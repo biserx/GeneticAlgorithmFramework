@@ -1,15 +1,10 @@
+#include "../src/GeneticAlgorithmFramework.hpp"
 #include <iostream>
 #include <chrono>
-#include "../src/GeneticAlgorithmFramework.hpp"
 
 using namespace std;
 using namespace std::chrono;
 using namespace GA;
-
-// Specify here if we are looking for minimum or maximum
-namespace GA {
-	bool searchForMaximum = false;
-}
 
 const int POPULATION_SIZE = 20;
 const int CHROMOSOME_SIZE = 3;
@@ -51,6 +46,9 @@ int main() {
 
 	// Initialize Genetic Algorithm class.
 	GeneticAlgorithm();
+
+	// Specify here if we are looking for minimum or maximum
+	GA::searchForMaximum = false;
 
 	// Create appropriate blocks for running the algorithm.
 	RandomInitializator init_block = RandomInitializator(INIT_CENTER, INIT_DIAMETER);

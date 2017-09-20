@@ -1,8 +1,8 @@
 #ifndef CHROMOSOME
 #define CHROMOSOME
 
-#include <vector>
 #include "config.hpp"
+#include <vector>
 
 using namespace std;
 
@@ -39,6 +39,10 @@ namespace GA {
 
 			int size() const {
 				return values.size();
+			}
+
+			inline GENOTYPE_TYPE operator[](int i) const {
+				return values[i];
 			}
 
 			void setValues(const ChromosomeValues& vals) {

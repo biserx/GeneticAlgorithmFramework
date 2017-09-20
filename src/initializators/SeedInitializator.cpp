@@ -1,6 +1,6 @@
-#include <cassert>
 #include "SeedInitializator.hpp"
 #include "../utils/Randomizer.hpp"
+#include <cassert>
 
 namespace GA {
 	SeedInitializator::SeedInitializator(ChromosomeValues init_seed, GENOTYPE_TYPE init_diameter) :
@@ -15,7 +15,7 @@ namespace GA {
 		assert(chromosome_size == ((*individuals)[0].getChromosome()->getValues())->size());
 
 		for (int i = 0; i < individuals->size(); i++) {
-			randomizeValues((*individuals)[i].getChromosome()->getValues(), 0, init_radius);
+			Randomizer::randomizeValues((*individuals)[i].getChromosome()->getValues(), 0, init_radius);
 			for (int j = 0; j < chromosome_size; j++) {
 				(*((*individuals)[i].getChromosome()->getValues()))[j] += init_seed[j];
 			}

@@ -1,9 +1,9 @@
 #ifndef INDIVIDUAL
 #define INDIVIDUAL
 
-#include <vector>
 #include "config.hpp"
 #include "Chromosome.hpp"
+#include <vector>
 
 using namespace std;
 

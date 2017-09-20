@@ -1,4 +1,5 @@
 #include "RouletteWheelSelection.hpp"
+#include "../utils/Randomizer.hpp"
 
 namespace GA {
 	extern bool searchForMaximum;
@@ -52,7 +53,7 @@ namespace GA {
 	void RouletteWheelSelection::get_selected(Generation* outGeneration, int count) {
 		assert(outGeneration != NULL);
 		while (count != 0) {
-			double pocket = rand() % PRECISION * 1.0 / PRECISION;
+			double pocket = Randomizer::getRandomValue(0, 1);
 			pocket *= total_fitness;
 			double start = 0;
 			bool selection_done = false;

@@ -1,18 +1,20 @@
 #ifndef GENETIC_ALGORITHM
 #define GENETIC_ALGORITHM
 
-#include <iostream>
-#include <cstdlib>
-#include <chrono>
-#include <vector>
 #include "config.hpp"
 #include "Chromosome.hpp"
 #include "Individual.hpp"
 #include "Generation.hpp"
+#include <iostream>
+#include <cstdlib>
+#include <chrono>
+#include <vector>
 
 using namespace std;
 
 namespace GA {
+	bool searchForMaximum = true;
+
 	class GeneticAlgorithm
 	{
 		public:

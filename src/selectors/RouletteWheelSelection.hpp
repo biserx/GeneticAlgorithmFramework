@@ -1,6 +1,6 @@
+#include "SelectionBlock.hpp"
 #include <vector>
 #include <cassert>
-#include "SelectionBlock.hpp"
 
 namespace GA {
 	class RouletteWheelSelection : public SelectionBlock

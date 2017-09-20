@@ -1,9 +1,9 @@
 #ifndef GENERATION
 #define GENERATION
 
-#include <algorithm>
 #include "config.hpp"
 #include "Individual.hpp"
+#include <algorithm>
 
 using namespace std;
 

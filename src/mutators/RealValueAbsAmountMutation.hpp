@@ -1,5 +1,5 @@
-#include <vector>
 #include "MutationBlock.hpp"
+#include <vector>
 
 namespace GA {
 	class RealValueAbsAmountMutation : public MutationBlock
