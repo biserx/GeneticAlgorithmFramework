@@ -1,4 +1,9 @@
 #include "ProportionMerge.hpp"
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <cassert>
+#include <algorithm>
 
 namespace GA {
 	ProportionMerge::ProportionMerge(double proportion) : proportion(proportion) {
@@ -19,6 +24,7 @@ namespace GA {
 		g2->sortIndividualsByFitness();
 
 		assert(out != NULL);
+		out->clear();
 		assert(g1 != NULL && g2 != NULL);
 		assert(g1->size() > 0 && g2->size() > 0);
 		assert(g1->size() == g2->size());
@@ -35,8 +41,5 @@ namespace GA {
 			Individual* tmpI = &(*(g2->getIndividuals()))[i];
 		 	(out->getIndividuals())->push_back(*tmpI);
 		}
-		//sort((*(out->getIndividuals())).begin(), (*(out->getIndividuals())).end());
-		out->sortIndividualsByFitness();
-
 	}
 }

@@ -1,6 +1,5 @@
 #include "SelectionBlock.hpp"
 #include <vector>
-#include <cassert>
 
 namespace GA {
 	class RouletteWheelSelection : public SelectionBlock
@@ -8,15 +7,14 @@ namespace GA {
 		private:
 			double total_fitness;
 
-			struct SelectionStruct {
-				Individual individual;
+			struct ExtendedIndividual : public Individual {
 				double normalized_fitness;
-				SelectionStruct(const Individual& individual, double normalized_fitness) : individual(individual), normalized_fitness(normalized_fitness) {	}
-				bool operator<(const SelectionStruct& ss) const {
+				ExtendedIndividual(const Individual& individual, double normalized_fitness) : Individual(individual), normalized_fitness(normalized_fitness) {	}
+				bool operator<(const ExtendedIndividual& ss) const {
 		        	return normalized_fitness < ss.normalized_fitness;
 		    	}
 			};
-			vector<SelectionStruct> lGeneration;
+			vector<ExtendedIndividual> lGeneration;
 
 		public:
 			RouletteWheelSelection();

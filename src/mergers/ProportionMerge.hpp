@@ -1,9 +1,4 @@
 #include "MergeBlock.hpp"
-#include <vector>
-#include <cstdlib>
-#include <ctime>
-#include <cassert>
-#include <algorithm>
 
 namespace GA {
 	class ProportionMerge : public MergeBlock

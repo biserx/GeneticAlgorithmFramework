@@ -1,9 +1,14 @@
 #include "RealValuePercentageMutation.hpp"
 #include "../utils/Randomizer.hpp"
 #include <cassert>
+#include <vector>
 
 namespace GA {
-	RealValuePercentageMutation::RealValuePercentageMutation(double probability, double percentage) : probability(probability), percentage(percentage) {}
+	RealValuePercentageMutation::RealValuePercentageMutation(double probability, double percentage) : probability(probability), percentage(percentage) {
+		#ifndef USE_REAL_VALUES
+			assert(!"RealValuePercentageMutation cant be used with non real values.");
+		#endif
+	}
 
 	void RealValuePercentageMutation::mutate(Individual *in) {
 		vector<GENOTYPE_TYPE> *values = in->getChromosome()->getValues();

@@ -1,6 +1,4 @@
 #include "CrossoverBlock.hpp"
-#include <vector>
-#include <cassert>
 
 namespace GA {
 	class ValueOnePointCrossover : public CrossoverBlock

@@ -38,4 +38,3 @@ void genericPointCrossover(vector<T> *vals1, vector<T> *vals2, uint pointsNo, do
 		i++;
 	}
 }
-
